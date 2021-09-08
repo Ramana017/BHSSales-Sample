@@ -1,0 +1,176 @@
+<div class="ms-5 p  pt-4">
+    <div class="mx-5 pt-5">
+        <p-card  class="p-3" styleClass="inquiry">
+          <form [formGroup]="activityForm">
+            <div class="row align-items-start ">
+                <div class="col-12 d-flex nav">
+                    <div class="fieldset-title ps-3 w-100">
+                        <div class="legend">
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <h5 class="AvenirLTStd-Heavy mb-0 px-2 bg-white">Inquiry Details</h5>
+                            </div>
+                        </div>
+                        <div class="d-flex nav">
+                            <div class="p-field col-md-4 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy "> Inquiry # <span class="text-danger">*</span>
+                                    </label>
+                                    <span class="d-flex align-items-center drop-cont">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons f-20">
+                                                list
+                                            </span>
+                                        </span>
+                                        <p-dropdown [resetFilterOnHide]="true" [disabled]="activityForm.value.activityId!=0" [virtualScroll]="true" [itemSize]="20" [filter]="true" (onChange)="onInquirySelect($event)" [filter]="true" placeholder="Inquiry #" [ngClass]="{'is-invalid':formControls.inquiryId.invalid && formError}"  [options]="_apiservice.inquiriesLookUp" formControlName="inquiryId" optionValue="recordId" optionLabel="recordId" [showClear]="true"
+                                            class="w-100" styleClass="w-100"></p-dropdown>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-md-4 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Client Name
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                person
+                                            </span>
+                                        </span>
+                                        <input type="text" readonly style="cursor:not-allowed;" formControlName="inquiryClientName" id="inputgroup" pInputText autocomplete="off" placeholder="Client Name">
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="fieldset-title ps-3 mt-0 w-100">
+                        <div class="legend">
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <h5 class="AvenirLTStd-Heavy mb-0 px-2 bg-white">Activity Details</h5>
+                            </div>
+                        </div>
+                        <div class="d-flex nav">
+                            <div class="p-field col-md-4 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Activity Date
+                                    </label>
+                                    <span class="d-flex align-items-center col-md-6 col-12">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                today
+                                            </span>
+                                        </span>
+                                        <!-- <p-calendar appendTo="body" formControlName="date" placeholder="MM/DD/YYYY"  inputId="basic" class="w-100" styleClass="w-100"></p-calendar> -->
+                                        <input type="text"
+                                        placeholder="MM/DD/YYYY"
+                                        class="form-control "
+                                        bsDatepicker
+                                        formControlName="date"
+                                        >
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-md-4 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Activity Type
+                                    </label>
+                                    <span class="d-flex align-items-center drop-cont">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons f-20">
+                                                list
+                                            </span>
+                                        </span>
+                                        <p-dropdown [resetFilterOnHide]="true" [filter]="true"placeholder="Activity Type" [virtualScroll]="true" [itemSize]="20" [options]="_apiservice.lookupresponse?.activity_type" formControlName="activityTypeId" optionValue="id" optionLabel="name" [showClear]="true"
+                                            class="w-100" styleClass="w-100"></p-dropdown>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="p-field col-md-4 col-12 pt-2 " *ngIf="activityForm.value.activityTypeId==6||activityForm.value.activityTypeId==4">
+                                <div class="p-inputgroup row" *ngIf="activityForm.value.activityTypeId==4">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Hold
+                                    </label>
+                                    <span class="d-flex align-items-center drop-cont">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                back_hand
+                                                </span>
+                                        </span>
+                                        <p-dropdown [resetFilterOnHide]="true" [filter]="true"formControlName="hold" optionValue="id" [options]="_apiservice.lookupresponse?.hold_reason" placeholder="Select Hold" optionLabel="name" [showClear]="true"
+                                            class="w-100" styleClass="w-100"></p-dropdown>
+                                    </span>
+                                </div>
+                                <div class="p-inputgroup row" *ngIf="activityForm.value.activityTypeId==6">
+                                  <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Non-Conversion
+                                  </label>
+                                  <span class="d-flex align-items-center drop-cont">
+                                      <span class="p-inputgroup-addon">
+                                          <span class="material-icons-outlined f-20">
+                                              back_hand
+                                              </span>
+                                      </span>
+                                      <p-dropdown [resetFilterOnHide]="true" [filter]="true"formControlName="nonConversionReasonId" optionValue="id" [options]="_apiservice.lookupresponse?.non_conversion_reason" placeholder="Select Non Conversion" optionLabel="name" [showClear]="true"
+                                          class="w-100" styleClass="w-100"></p-dropdown>
+                                  </span>
+                              </div>
+                            </div>
+                            <div class="p-field col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Detail
+                                    </label>
+                                    <span class="d-flex  ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                info
+                                            </span>
+                                        </span>
+                                        <textarea id="float-input" formControlName="detail" rows="4" pInputText autocomplete="off"area
+                                            placeholder="Detail"></textarea>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-md-4 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Assigned To
+                                    </label>
+                                    <span class="d-flex align-items-center drop-cont">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                person
+                                            </span>
+                                        </span>
+                                        <p-dropdown [disabled]="activityForm.value.activityId!=0?this._apiservice.referralPrivilageId==1?false:true:false" [resetFilterOnHide]="true" [filter]="true"placeholder="Assigned To" [options]="_apiservice.lookupresponse?.users" optionValue="id" formControlName="assignedTo" optionLabel="name" [showClear]="true"
+                                          class="w-100" styleClass="w-100"></p-dropdown>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-md-4 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Created By
+                                    </label>
+                                    <span class="d-flex align-items-center drop-cont">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                person
+                                            </span>
+                                        </span>
+                                      <p-dropdown [resetFilterOnHide]="true" [disabled]="activityForm.value.activityId!=0" [filter]="true"formControlName="createdBy" [options]="_apiservice.lookupresponse?.users" optionValue="id"  placeholder="Created By" optionLabel="name" [showClear]="true"
+                                            class="w-100" styleClass="w-100"></p-dropdown>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-3 d-flex nav">
+                </div> -->
+            </div>
+            <div  class="nav justify-content-between align-items-center mt-2 px-2 p-button-save">
+                <button [routerLink]="['/activity']"  pButton pRipple type="button" icon="pi pi-times" label="Close"
+                    class="p-button-danger"></button>
+                <p-button *ngIf="_apiservice.referralPrivilageId!=4" (click)="saveActivity()" label="{{ activityForm.value.activityId==0?'Create':'Save'}}" icon="pi pi-send" class=""></p-button>
+            </div>
+            </form>
+        </p-card>
+    </div>
+</div>

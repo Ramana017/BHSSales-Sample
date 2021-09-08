@@ -1,0 +1,251 @@
+<!-- <p>inquiry works!</p> -->
+<div class="ms-5 ps-4 pt-4">
+    <div class="pt-5 mx-2">
+
+        <div class="">
+            <div class="card">
+                <p-table [value]="inquiriesList" id="excel-table"
+                    styleClass="p-datatable-sm custom-table p-datatable-gridlines inquiry-table p-datatable-striped">
+                    <ng-template pTemplate="caption">
+                        <div class="nav justify-content-between">
+                            <div class="d-flex align-items-center nav ">
+                                <div class="d-flex align-items-center pb-1 ">
+                                    <span class="">
+                                        <input type="number" [(ngModel)]="recordId" pInputText autocomplete="off" placeholder="Inquiry #"
+                                            class="AvenirLTStd-Roman rounded-pill w-110" />
+                                    </span>
+                                </div>
+                                <!-- <div class="d-flex align-items-center ms-2  pb-1 w-200">
+                                    <span class="w-100">
+                                            <p-calendar [(ngModel)]="inquiryDate" selectionMode="range" styleClass="w-100" placeholder="Start Date -End Date" class="w-100" [readonlyInput]="true" inputId="range"></p-calendar>
+                                    </span>
+                                </div> -->
+                                <div class="d-flex align-items-center ms-1  pb-1 ">
+                                    <span class="w-90px">
+                                            <!-- <p-calendar  inputId="navigators" [(ngModel)]="inquiryDateStart"  styleClass="w-100" placeholder="Start Date " class="w-100" [yearNavigator]="true"yearRange="2000:9999" [monthNavigator]="true" [readonlyInput]="false" ></p-calendar> -->
+                                            <input type="text"
+                                            placeholder="Start Date"
+                                            class="form-control rounded-pill"
+                                            bsDatepicker
+                                            [(ngModel)]="inquiryDateStart"
+                                            >
+                                        </span>
+                                </div>
+                                <div class="d-flex align-items-center ms-1  pb-1 ">
+                                    <span class="w-90px">
+                                        <input type="text"
+                                        placeholder="End Date"
+                                        class="form-control rounded-pill"
+                                        bsDatepicker
+                                        [(ngModel)]="inquiryDateEnd"
+                                        >
+                                            <!-- <p-calendar  inputId="navigators" [(ngModel)]="inquiryDateEnd"   styleClass="w-100"[yearNavigator]="true" [monthNavigator]="true" yearRange="2000:9999" placeholder="End Date" class="w-100" [readonlyInput]="false" ></p-calendar> -->
+                                    </span>
+                                </div>
+                                <div style="z-index: 1021" class="d-flex align-items-center ms-1  pb-1">
+                                    <span class="">
+                                        <p-dropdown [resetFilterOnHide]="true" [filter]="true" [options]="_apiservice.lookupresponse?.branch" [showClear]="true" [(ngModel)]="branchName" apppendTo="body" optionLabel="name" optionValue="id" styleClass="w-200 rounded-pill"
+                                            placeholder="Branch Name"></p-dropdown>
+                                    </span>
+                                </div>
+                                <div class="d-flex align-items-center ms-1  pb-1">
+                                    <span class="">
+                                        <input type="text" pInputText autocomplete="off" [(ngModel)]="clientName" placeholder="Client Name"
+                                            class="AvenirLTStd-Roman rounded-pill" />
+                                    </span>
+                                </div>
+                                <div style="z-index: 1021" class="d-flex align-items-center ms-1  pb-1">
+                                    <span class="">
+                                        <p-dropdown [resetFilterOnHide]="true" [filter]="true" [(ngModel)]="statusId" [showClear]="true" [options]="_apiservice.lookupresponse?.status" apppendTo="body" optionValue="id" optionLabel="name" styleClass="w-120 rounded-pill"
+                                            placeholder="Status"></p-dropdown>
+                                    </span>
+                                </div>
+                                <div class="d-flex align-items-center ms-1  pb-1">
+                                    <span class="">
+                                        <input type="text" [(ngModel)]="callerName" pInputText autocomplete="off" placeholder="Caller Name"
+                                            class="AvenirLTStd-Roman rounded-pill w-110" />
+                                    </span>
+                                </div>
+                                <div class="d-flex align-items-center ms-1  pb-1">
+                                    <span class="">
+                                        <input type="text" [(ngModel)]="callerNumber" pInputText autocomplete="off" placeholder="Caller Phone "
+                                            class="AvenirLTStd-Roman rounded-pill w-110" />
+                                    </span>
+                                </div>
+                                <div style="z-index: 1021" class="d-flex align-items-center ms-1  pb-1">
+                                    <span class="">
+                                        <!-- <p-dropdown [resetFilterOnHide]="true" [options]="statuslist" apppendTo="body" optionLabel="name" placeholder="Status"></p-dropdown> -->
+                                        <button class="p-button-rounded ms-1" (click)="onGo($event)" pButton
+                                            label="Go"></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="icons-right-header-cont d-flex align-items-center  pb-1">
+                                <button *ngIf="_apiservice.referralPrivilageId==1||_apiservice.referralPrivilageId==2" class="p-button-rounded ms-1" pButton  icon="pi pi-plus " label="New Inquiry"
+                                    [routerLink]="['/create-inquiry']" routerLinkActive="router-link-active" ></button>
+                                <span style="cursor: pointer;" [pTooltip]="'Export'" (click)="exportexcel2()" class="material-icons-outlined ms-1 ">
+                                    file_download
+                                </span>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="sticky-top" style="min-width: 5rem"></th>
+                            <th class="sticky-top">Inquiry # </th>
+                            <th class="sticky-top">
+                              <div class="d-flex align-items-center">
+                                Inquiry Date<span [ngClass]="{'sortActive':orderBy=='inquiry date','d-none':!inquiryDateSort}" (click)="inquiryDateSort=!inquiryDateSort;onsort('asc','inquiry date',$event)" style="cursor:pointer"  class="material-icons-outlined f-20">
+                                      expand_more
+                                  </span>
+                                  <span [ngClass]="{'sortActive':orderBy=='inquiry date','d-none':inquiryDateSort}" (click)="inquiryDateSort=!inquiryDateSort;onsort('desc','inquiry date',$event)" style="cursor:pointer"  class="material-icons-outlined f-20 ">
+                                      expand_less
+                                  </span>
+                                  </div>
+                              </th>
+                            <th class="sticky-top">
+                              <div class="d-flex align-items-center">
+                                Date Created<span [ngClass]="{'sortActive':orderBy=='date created','d-none':!dateCreatedSort}" (click)="dateCreatedSort=!dateCreatedSort;onsort('asc','date created',$event)" style="cursor:pointer"  class="material-icons-outlined f-20">
+                                      expand_more
+                                  </span>
+                                  <span [ngClass]="{'sortActive':orderBy=='date created','d-none':dateCreatedSort}" (click)="dateCreatedSort=!dateCreatedSort;onsort('desc','date created',$event)" style="cursor:pointer"  class="material-icons-outlined f-20 ">
+                                      expand_less
+                                  </span>
+                                  </div>
+                            </th>
+                            <th class="sticky-top">
+                              <div class="d-flex align-items-center">
+                                Branch Name<span [ngClass]="{'sortActive':orderBy=='branch name','d-none':!branchNameSort}" (click)="branchNameSort=!branchNameSort;onsort('asc','branch name',$event) " style="cursor:pointer"  class="material-icons-outlined f-20">
+                                      expand_more
+                                  </span>
+                                  <span [ngClass]="{'sortActive':orderBy=='branch name','d-none':branchNameSort}" (click)="branchNameSort=!branchNameSort;onsort('desc','branch name',$event)" style="cursor:pointer"  class="material-icons-outlined f-20 ">
+                                      expand_less
+                                  </span>
+                                  </div>
+                              </th>
+                            <th class="sticky-top">
+                              <div class="d-flex align-items-center">
+                                Client Name<span [ngClass]="{'sortActive':orderBy=='client name','d-none':!clientLastNameSort}" (click)="clientLastNameSort=!clientLastNameSort;onsort('asc','client name',$event)" style="cursor:pointer"  class="material-icons-outlined f-20">
+                                      expand_more
+                                  </span>
+                                  <span [ngClass]="{'sortActive':orderBy=='client name','d-none':clientLastNameSort}" (click)="clientLastNameSort=!clientLastNameSort;onsort('desc','client name',$event)" style="cursor:pointer"  class="material-icons-outlined f-20 ">
+                                      expand_less
+                                  </span>
+                                  </div>
+                            </th>
+                            <th class="sticky-top"> Caller Name</th>
+                            <th class="sticky-top"> Caller Phone</th>
+                            <th class="sticky-top"> Status</th>
+                            <!-- <th class="sticky-top">Inquiry Status</th> -->
+                            <th class="sticky-top"># Activities</th>
+                            <th class="sticky-top">Last Activity Date</th>
+                            <th class="sticky-top">Follow-up Date</th>
+                            <th class="sticky-top">
+                              <div class="d-flex align-items-center">
+                                Record Owner<span [ngClass]="{'sortActive':orderBy=='record owner','d-none':!recordOwnerSort}" (click)="recordOwnerSort=!recordOwnerSort;onsort('asc','record owner',$event)" style="cursor:pointer"  class="material-icons-outlined f-20">
+                                      expand_more
+                                  </span>
+                                  <span [ngClass]="{'sortActive':orderBy=='record owner','d-none':recordOwnerSort}" (click)="recordOwnerSort=!recordOwnerSort;;onsort('desc','record owner',$event)" style="cursor:pointer"  class="material-icons-outlined f-20 ">
+                                      expand_less
+                                  </span>
+                                  </div></th>
+
+                            <th class="sticky-top">Last Modified By</th>
+                            <th class="sticky-top"> Patient ID</th>
+                            <th class="sticky-top"> Conversion</th>
+                            <th class="sticky-top">
+                              <div class="d-flex align-items-center">
+                                Last Updated<span [ngClass]="{'sortActive':orderBy=='last updated','d-none':!lastUpdatedSort}" (click)="lastUpdatedSort=!lastUpdatedSort;onsort('asc','last updated',$event)" style="cursor:pointer"  class="material-icons-outlined f-20">
+                                      expand_more
+                                  </span>
+                                  <span [ngClass]="{'sortActive':orderBy=='last updated','d-none':lastUpdatedSort}" (click)="lastUpdatedSort=!lastUpdatedSort;;onsort('desc','last updated',$event)" style="cursor:pointer"  class="material-icons-outlined f-20 ">
+                                      expand_less
+                                  </span>
+                                  </div>
+                              </th>
+
+
+                            <!-- <th class="sticky-top" style="width:10rem">Active</> -->
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+                        <tr>
+                            <td class="text-center" >
+                                <span style="cursor: pointer;" (click)="edit(item.recordId,item.clientName?item.clientName:'')" class="material-icons-outlined f-20 color-green">
+                                    edit
+                                </span>
+                                <span *ngIf="_apiservice.referralPrivilageId==1" style="cursor: pointer;" (click)="deleteInquiry(item.recordId)" class="  material-icons-outlined ms-2 text-danger f-20">
+                                    delete
+                                </span>
+                            </td>
+                            <td>{{item.recordId}}</td>
+                            <td>{{item.inquiryDate}}</td>
+                            <td>{{item.dateCreated}}</td>
+
+                            <td>{{item.branchName}}</td>
+                            <td>{{item.clientName}}</td>
+                            <td>{{item?.callerName}}</td>
+                            <td>{{item?.callerPhone}}</td>
+                            <td>{{item.status}}</td>
+                            <td (click)="activityRoute(item.recordId,item.clientName?item.clientName:'')" class="text-end AvenirLTStd-Medium pe-3"><u class="anchorblue" >{{item.activities}}</u></td>
+                            <td>{{item.inquiryDate}}</td>
+
+                            <td>{{item?.followUpDate}}</td>
+                            <td>{{item.recordOwner}}</td>
+                            <td>{{item.lastModifiedBy}}</td>
+
+                            <td>{{item?.patientId==0?'':item?.patientId}}</td>
+                            <td>{{item?.conversion}}</td>
+                            <td>{{item?.lastUpdated}}</td>
+
+
+                        </tr>
+
+                    </ng-template>
+                </p-table>
+                <p *ngIf="inquiriesList.length==0" class="no-records text-center"  >No Records Found</p>
+
+                <p-paginator #p [totalRecords]="totalRecordsCount" [rows]="perPage" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"  (onPageChange)="onPageChange($event)" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- <p-overlayPanel #op [style]="{width: '300px'}" appendTo="body">
+    <ng-template pTemplate>
+        <label for="inputgroup" class="AvenirLTStd-Heavy f-14 mt-2">Group</label>
+        <div class="p-inputgroup  ">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <span class="p-float-label">
+                <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Group">
+            </span>
+        </div>
+        <label class="AvenirLTStd-Heavy f-14 mt-2">Active</label>
+        <div class="d-flex align-items-center ">
+            <div class="p-field-radiobutton d-flex align-items-center">
+                <p-radioButton name="groupname" value="val1" [(ngModel)]="selectedValue"></p-radioButton>
+                <label for="city1" class="mx-2 AvenirLTStd-Light">Yes</label>
+            </div>
+            <div class="p-field-radiobutton d-flex align-items-center ">
+                <p-radioButton name="groupname" value="val1" [(ngModel)]="selectedValue"></p-radioButton>
+                <label for="city2" class="mx-2 AvenirLTStd-Light">No</label>
+            </div>
+            <div class="p-field-radiobutton d-flex align-items-center">
+                <p-radioButton name="groupname" value="val1" [(ngModel)]="selectedValue"></p-radioButton>
+                <label for="city3" class="mx-2 AvenirLTStd-Light">All</label>
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-end">
+            <button pButton pRipple type="button" icon="pi pi-search"
+                class="p-button-rounded p-button-success mt-2"></button>
+
+        </div>
+    </ng-template>
+</p-overlayPanel> -->

@@ -1,0 +1,172 @@
+<!-- <p>inquiry works!</p> -->
+<div class="ms-5 ps-4  pt-4">
+    <div class="pt-5 mx-2">
+        <div class="d-flex align-items-center justify-content-between p-2 box-shadow bg-blue">
+            <div class="d-flex align-items-center nav ">
+                <div style="z-index: 1021" class="d-flex align-items-center ms-2  pb-1">
+                    <span class="w-200">
+                        <!-- <p-dropdown [resetFilterOnHide]="true" [(ngModel)]="recordId" [showClear]="true" [options]="inquiriesList" apppendTo="body" optionValue="recordId " optionLabel="recordId" styleClass="w-200 rounded-pill"
+                        placeholder="Inquiry"></p-dropdown> -->
+                        <p-dropdown [resetFilterOnHide]="true" [virtualScroll]="true" [filter]="true"
+                             [ngClass]="{'ng-invalid ng-dirty ':true}" placeholder="Inquiry #"
+                            [itemSize]="20" [options]="_apiservice.inquiriesLookUp" [(ngModel)]="recordId"
+                            optionValue="recordId" optionLabel="recordId" [showClear]="true" class="w-100"
+                            styleClass="w-100 rounded-pill"></p-dropdown>
+                    </span>
+                </div>
+                <div style="z-index: 1021" class="d-fles align-items-center ms-2  pb-1">
+                    <div class="w-200">
+                        <input type="text"  [(ngModel)]="clientName" pInputText autocomplete="off"
+                            placeholder="Client Name" class="AvenirLTStd-Roman rounded-pill w-100" />
+                    </div>
+                </div>
+                <div style="z-index: 1021" class="d-fles align-items-center ms-2  pb-1">
+                    <div class="w-200">
+                        <input type="text"  [(ngModel)]="callerName" pInputText autocomplete="off"
+                            placeholder="Caller Name" class="AvenirLTStd-Roman rounded-pill w-100" />
+                    </div>
+                </div>
+                <div style="z-index: 1021" class="d-fles align-items-center ms-2  pb-1">
+                    <div class="w-200">
+                        <input type="number"  [(ngModel)]="phoneNumber" pInputText autocomplete="off"
+                            placeholder="Caller Phone" class="AvenirLTStd-Roman rounded-pill w-100" />
+                    </div>
+                </div>
+                <div style="z-index: 1021" class="d-flex align-items-center ms-2  pb-1">
+                    <span class="w-200">
+                        <p-dropdown [resetFilterOnHide]="true" [virtualScroll]="true" [filter]="true"
+                             placeholder="Activity Type"
+                            [itemSize]="20" [options]="_apiservice.lookupresponse?.activity_type" [(ngModel)]="activityTypeId"
+                            optionValue="id" optionLabel="name" [showClear]="true" class="w-100"
+                            styleClass="w-100 rounded-pill"></p-dropdown>
+                    </span>
+                </div>
+                <div style="z-index: 1021" class="d-flex align-items-center ms-2  pb-1">
+                    <span class="">
+                        <button  class="p-button-rounded ms-2" pButton (click)="onGo($event)"
+                            label="Go"></button>
+                    </span>
+                </div>
+                <!-- <div style="z-index: 1021" class="d-flex align-items-center ms-2  pb-1">
+                    <p-checkbox name="group1" value="New York" inputId="ny"></p-checkbox>
+                    <p-inputSwitch ></p-inputSwitch>
+                        <label for="ny" class="ms-2 color-white">To Do</label>
+
+                </div> -->
+            </div>
+            <div class="icons-right-header-cont d-flex align-items-center">
+                <button *ngIf="_apiservice.referralPrivilageId==1||_apiservice.referralPrivilageId==2" class="p-button-rounded ms-2" (click)="addActivity()" pButton label="Add Activity"
+                    icon="pi pi-plus "></button>
+            </div>
+        </div>
+        <div class="">
+            <div class="card">
+                <p-table [value]="activityList"
+                    styleClass="p-datatable-sm custom-table p-datatable-gridlines p-datatable-striped">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="sticky-top" style="width: 5rem"></th>
+                            <th class="sticky-top">Inquiry #</th>
+                            <th class="sticky-top">Client Name</th>
+                            <th class="sticky-top">Activity Type</th>
+                            <th class="sticky-top">
+                                <div class="d-flex align-items-center">
+                                  Activity Date <span [ngClass]="{'sortActive':orderBy=='activity date','d-none':!activeAsc}" style="cursor:pointer" (click)="onsort('asc','activity date',$event);activeAsc=!activeAsc" class="material-icons-outlined f-20">
+                                        expand_more
+                                    </span>
+                                    <span [ngClass]="{'sortActive':orderBy=='activity date','d-none':activeAsc}" style="cursor:pointer" (click)="onsort('desc','activity date',$event);activeAsc=!activeAsc" class="material-icons-outlined f-20 ">
+                                        expand_less
+                                    </span>
+
+                                </div>
+                            </th>
+                            <th class="sticky-top">
+                                <div class="d-flex align-items-center">
+                                  Start Time <span [ngClass]="{'sortActive':orderBy=='start time','d-none':!startTime}" style="cursor:pointer" (click)="onsort('asc','start time',$event);startTime=!startTime" class="material-icons-outlined f-20">
+                                        expand_more
+                                    </span>
+                                    <span [ngClass]="{'sortActive':orderBy=='start time','d-none':startTime}" style="cursor:pointer" (click)="onsort('desc','start time',$event);startTime=!startTime" class="material-icons-outlined f-20 ">
+                                        expand_less
+                                    </span>
+                                    </div>
+                            </th>
+                            <th class="sticky-top">
+                                <div   class="d-flex align-items-center">
+                                  Completed Date
+                                    <span [ngClass]="{'sortActive':orderBy=='completed date','d-none':!complated}" style="cursor:pointer" (click)="onsort('asc','completed date',$event);complated=!complated" class="material-icons-outlined f-20 ">
+                                        expand_more
+                                    </span>
+                                    <span [ngClass]="{'sortActive':orderBy=='completed date','d-none':complated}" style="cursor:pointer" (click)="onsort('desc','completed date',$event);complated=!complated" class="material-icons-outlined f-20 ">
+                                        expand_less
+                                    </span>
+                                    </div>
+                            </th>
+                            <th class="sticky-top">Action Type</th>
+                            <th class="sticky-top">Caller Name</th>
+                            <th class="sticky-top">Caller Phone</th>
+                            <th class="sticky-top">Details</th>
+                            <th class="sticky-top">Status</th>
+                            <th class="sticky-top">Created By</th>
+                            <th class="sticky-top">Assigned To</th>
+
+
+                        </tr>
+                    </ng-template>
+                    <tr>
+
+                    </tr>
+                    <ng-template pTemplate="body" let-item let-index="rowIndex">
+                        <tr class="bg-grey" *ngIf="index==0">
+                            <td colspan="11">
+                                <p class="mb-0 AvenirLTStd-Heavy f-14 color-black p-2">Completed ({{totalRecordsCount}}
+                                    Activities)</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                <span style="cursor:pointer" (click)="editActivity(item.recordId,item.activityId)"
+                                    class="material-icons-outlined f-20 color-green">
+                                    edit
+                                </span>
+                                <span *ngIf="_apiservice.referralPrivilageId==1" style="cursor:pointer" (click)="deleteActivity(item.activityId)"
+                                    class="material-icons-outlined ms-2 text-danger f-20">
+                                    delete
+                                </span>
+                            </td>
+                            <td (click)="activitypopup(item.recordId)"><u
+                                    class="anchorblue cursor-pointer">{{item.recordId}}</u></td>
+                            <td>{{item.clientName}}</td>
+                            <td>{{item.activityType}}</td>
+                            <td>{{item.activityDate}}</td>
+                            <td>{{item.startTime}}</td>
+                            <td>{{item.completedDate}}</td>
+                            <td>{{item.type}}</td>
+                            <td>{{item.callerName}}</td>
+                            <td>{{item.callerPhone}}</td>
+                            <td [ngClass]="{'cursor-pointer':item?.details?.length>0}" (click)="item?.details?.length>0?onDetailClick(item.details):''">{{item.details?(item.details|slice:0:200) :''}} {{item.details?item.details.length>200?'...':'':''}}</td>
+                            <td>{{item.status}}</td>
+                            <td>{{item.createdBy}}</td>
+                            <td>{{item.assignedTo}}</td>
+
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p *ngIf="activityList.length==0" class="no-records text-center">No Records Found</p>
+
+                <p-paginator  #p [totalRecords]="totalRecordsCount" [rows]="10"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    (onPageChange)="onPageChange($event)" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+<p-dialog header="Details" [modal]="true" [dismissableMask]="true" [(visible)]="detailsPopup" [baseZIndex]="10000" [style]="{width: '45vw'}">
+  {{detailsData}}
+</p-dialog>

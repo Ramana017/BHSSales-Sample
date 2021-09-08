@@ -1,0 +1,15 @@
+@import "variable";
+@import "mixins";
+@import "common";
+@import "login";
+@import "header";
+@import "custom-class";
+@import "dialog";
+@import 'material-icons/iconfont/material-icons.css';
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

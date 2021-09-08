@@ -1,0 +1,313 @@
+<!-- <p class="ms-5 ps-4">roles works!</p> -->
+<div class="ms-5 ps-4 mt-5 pt-4">
+    <div class="row m-0">
+        <div class="col-md-12 col-lg-6 col-12 mb-3">
+            <div class="card">
+                <p-table [value]="branchList" styleClass="p-datatable-sm custom-table p-datatable-gridlines">
+                    <ng-template pTemplate="caption">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h5 class="mb-0 AvenirLTStd-Heavy color-white">Branch List</h5>
+                            <div class="d-flex align-items-center">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-search"></i>
+                                    <input type="search" [(ngModel)]="branchname" (onClear)="onGo($event)" (keyup.enter)="onGo($event)" pInputText autocomplete="off" placeholder="Quick Search By Branch"
+                                        class="AvenirLTStd-Roman" />
+                                </span>
+                                <span class="material-icons-outlined cursor-pointer" (click)="op.toggle($event)">
+                                    filter_alt
+                                </span>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="sticky-top" style="width: 3rem"></th>
+                            <th class="sticky-top">Branch&nbsp;Name</th>
+
+                            <th class="sticky-top" style="width:10rem">Phone</th>
+                            <th class="sticky-top" style="width:3rem">Active</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+
+                        <tr>
+                            <td class="text-center cursor-pointer" (click)="getBranchDetails(item.branchId)"><span
+                                    class="material-icons-outlined f-20 color-green">
+                                    edit
+                                </span>
+                            </td>
+                            <td>{{item.branchName}}</td>
+
+                            <td>{{item.phoneNumber}}</td>
+                            <td>{{item.active==1?'Yes':'No'}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p *ngIf="branchList.length==0" class="no-records text-center"  >No Records Found</p>
+
+                <p-paginator #p [rows]="20" (onPageChange)="onPageChange($event)" [pageLinkSize]="3" [showCurrentPageReport]="true"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [totalRecords]="totalRecordsCount" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
+
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-6 col-12  roles-custom-header mb-3 ">
+            <p-card [formGroup]="branchForm" styleClass="pt-0">
+                <div class="fieldset ">
+                    <div class=" ">
+                        <div class="d-flex align-items-center justify-content-between title-header">
+                            <h5 class="AvenirLTStd-Heavy mb-0 px-2 ">{{this.branchForm.value.id==0? 'Create':'Edit'}} Branch</h5>
+                            <!-- <h5 class="AvenirLTStd-Heavy mb-0 px-2 cursor-pointer" *ngIf="edit"
+                                (click)="privilage=true">Map Roles</h5> -->
+                        </div>
+                    </div>
+                    <div class="p-fluid p-grid row m-0 event-f-g">
+                        <div class="p-field col-12 pt-2 ">
+                            <div class="p-inputgroup row">
+                                <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Branch Contact <span
+                                        class="text-danger">*</span>
+                                </label>
+                                <span class="d-flex align-items-center ">
+                                    <span class="p-inputgroup-addon">
+                                        <span class="material-icons-outlined f-20">
+                                            person
+                                        </span>
+                                    </span>
+                                    <input type="text"
+                                        [ngClass]="{'is-invalid':formcontrole.branchName.invalid&& formError}"
+                                        formControlName="branchName" id="inputgroup" pInputText autocomplete="off"
+                                        placeholder="Branch Contact">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="p-field     col-md-6 col-12 pt-2 pe-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Branch Code
+                                    </label>
+                                    <span class="d-flex align-items-center">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                code
+                                            </span>
+                                        </span>
+                                        <!-- <p-inputNumber formControlName="branchCode" [useGrouping]="false" inputId="minmax" inputId="minmax" mode="decimal" ></p-inputNumber> -->
+
+                                        <input type="text" maxlength="5" formControlName="branchCode" id="inputgroup" pInputText autocomplete="off"
+                                            placeholder="Branch Code">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-field     col-6  pt-2 ">
+                            <div class="p-inputgroup row">
+                                <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">City
+                                </label>
+
+                                <span class="d-flex align-items-center">
+                                    <span class="p-inputgroup-addon">
+                                        <span class="material-icons-outlined f-20">
+                                            apartment
+                                        </span>
+                                    </span>
+                                    <input type="text" formControlName="city" id="inputgroup" pInputText autocomplete="off"
+                                        placeholder="City">
+
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="p-field     col-6 pt-2 ">
+                            <div class="p-inputgroup row">
+                                <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">State
+                                </label>
+
+                                <span class="d-flex align-items-center">
+                                    <span class="p-inputgroup-addon">
+                                        <span class="material-icons-outlined f-20">
+                                            flag
+                                        </span>
+                                    </span>
+                                    <p-dropdown [resetFilterOnHide]="true" [filter]="true" placeholder="Select State" [options]="_apiservice.lookupresponse?.state"
+                                            formControlName="state" optionValue="id" optionLabel="name"
+                                            [showClear]="true" class="w-100" styleClass="w-100"></p-dropdown>
+                                    <!-- <input type="text" formControlName="state" id="inputgroup" pInputText autocomplete="off"
+                                        placeholder="State"> -->
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-field     col-6 pt-2 ">
+                            <div class="p-inputgroup row">
+                                <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Zip
+                                </label>
+
+                                <span class="d-flex align-items-center">
+                                    <span class="p-inputgroup-addon">
+                                        <span class="material-icons-outlined f-20">
+                                            flag
+                                        </span>
+                                    </span>
+                                    <input type="text" formControlName="zip" id="inputgroup" pInputText autocomplete="off"
+                                        placeholder="Zip">
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-field     col-6 pt-2 ">
+                            <div class="p-inputgroup row">
+                                <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Phone
+                                </label>
+
+                                <span class="d-flex align-items-center">
+                                    <span class="p-inputgroup-addon">
+                                        <span class="material-icons-outlined f-20">
+                                            call
+                                        </span>
+                                    </span>
+                                    <p-inputMask inputId="integeronly" mask="(999) 999-9999" placeholder="(999) 999-9999"
+                                        formControlName="phone" class="w-100" styleClass="w-100"></p-inputMask>
+                                    <!-- <input type="text" formControlName="phone" id="inputgroup" pInputText autocomplete="off"
+                                        placeholder="Phone"> -->
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-field   col-6 pt-2 " >
+                            <div class="">
+                                <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Sort Order
+                                </label>
+                                <div class=" p-inputgroup d-flex align-items-center col-md-4 col-12" >
+                                    <span class="p-inputgroup-addon">
+                                        <span class="material-icons-round f-20">
+                                            sort
+                                        </span>
+                                    </span>
+                                    <span class="p-float-label">
+                                        <p-inputNumber type="number" formControlName="sortOrder" id="inputgroup"  class=" " placeholder="Sort Order"></p-inputNumber>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="  col-6 pt-2" >
+                            <div class="">
+                            <p class="f-14 AvenirLTStd-Heavy mb-0 col-4">Active</p>
+                            <div class=" p-field-checkbox ">
+                                <p-inputSwitch formControlName="active"></p-inputSwitch>
+
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </p-card>
+            <p-card styleClass="d-none pt-0 mt-2">
+                <div class="fieldset ">
+                    <div class=" ">
+                        <div class="d-flex title-header align-items-center justify-content-between">
+                            <h5 class="AvenirLTStd-Heavy mb-0 px-2 ">Map Roles</h5>
+                            <!-- <h5 class="AvenirLTStd-Heavy mb-0 px-2 cursor-pointer" (click)="privilage=false">Edit Group -->
+                            <!-- </h5> -->
+                        </div>
+                    </div>
+                    <div class="p-fluid p-grid row m-0 mb-2">
+                        <!-- <div class="col-md-4 col-12 d-flex align-items-center">
+                            <div class="p-field-checkbox ">
+                                <p class="f-16 AvenirLTStd-Heavy mb-0 mt-2">Role: coordinator</p>
+                            </div>
+                        </div> -->
+                        <!-- <div class="p-field   col-md-4  col-12 pt-4">
+                            <div class="p-inputgroup">
+                                <span class="p-inputgroup-addon">
+                                    <span class="material-icons-outlined f-20">
+                                        badge
+                                    </span>
+                                </span>
+                                <span class="p-float-label">
+                                    <p-dropdown [resetFilterOnHide]="true" inputId="dropdown" [autoDisplayFirst]="false" optionLabel="name"
+                                        class="w-100" styleClass="w-100"></p-dropdown>
+                                    <label for="inputgroup">Module
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-field   col-md-4  col-12 pt-4">
+                            <div class="p-inputgroup">
+                                <span class="p-inputgroup-addon">
+                                    <span class="material-icons-round f-20">
+                                        visibility_off
+                                    </span>
+                                </span>
+                                <span class="p-float-label">
+                                    <p-dropdown [resetFilterOnHide]="true" inputId="dropdown" [autoDisplayFirst]="false" optionLabel="name"
+                                        class="w-100" styleClass="w-100"></p-dropdown>
+                                    <label for="inputgroup">Privilege
+                                    </label>
+                                </span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <p-pickList [source]="" [target]="" sourceHeader="Available Roles"
+                        targetHeader="Selected Roles" [dragdrop]="true" [responsive]="true"
+                        [sourceStyle]="{'height':'25vh'}" [targetStyle]="{'height':'25vh'}" filterBy="id"
+                        sourceFilterPlaceholder="Search by Roles" targetFilterPlaceholder="Search by Roles">
+                        <ng-template let-customers pTemplate="item">
+                            <div class="product-item">
+                                {{customers.id}}
+                            </div>
+                        </ng-template>
+                    </p-pickList>
+                    <!-- <div class="nav justify-content-between align-items-center mt-2 px-2">
+                        <button pButton pRipple type="button" icon="pi pi-times" label="Close"
+                            class="p-button-danger"></button>
+                        <p-button label="Grant" icon="pi pi-send"></p-button>
+                    </div> -->
+                </div>
+            </p-card>
+            <div class="nav justify-content-between align-items-center mt-2 px-2">
+                <button pButton pRipple (click)="cretaForm()" type="button" icon="pi pi-times" label="Cancel"
+                    class="p-button-danger"></button>
+                <div *ngIf="priviligeType!='view'">
+                <p-button *ngIf="(priviligeType=='admin'||priviligeType=='manage')" label="{{this.branchForm.value.id==0? 'Create':'Save'}}" (click)="saveBranch()" icon="pi pi-send"></p-button>
+                <p-button *ngIf="(branchForm.value.id!=0 && priviligeType=='modify')" label="{{this.branchForm.value.id==0? 'Create':'Save'}}" (click)="saveBranch()" icon="pi pi-send"></p-button>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p-overlayPanel #op [style]="{width: '300px'}" appendTo="body">
+    <ng-template pTemplate>
+        <label for="inputgroup" class="AvenirLTStd-Heavy f-14 mt-2">Branch</label>
+        <div class="p-inputgroup  ">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <span class="p-float-label">
+                <input type="text" [(ngModel)]="branchname" id="inputgroup" pInputText autocomplete="off" placeholder="Branch">
+            </span>
+        </div>
+        <label class="AvenirLTStd-Heavy f-14 mt-2">Active</label>
+        <div class="d-flex align-items-center ">
+            <div class="p-field-radiobutton d-flex align-items-center">
+                <p-radioButton name="groupname" value="1" [(ngModel)]="active"></p-radioButton>
+                <label for="city1" class="mx-2 AvenirLTStd-Light">Yes</label>
+            </div>
+            <div class="p-field-radiobutton d-flex align-items-center ">
+                <p-radioButton name="groupname" value="0" [(ngModel)]="active"></p-radioButton>
+                <label for="city2" class="mx-2 AvenirLTStd-Light">No</label>
+            </div>
+            <div class="p-field-radiobutton d-flex align-items-center">
+                <p-radioButton name="groupname" value="2" [(ngModel)]="active"></p-radioButton>
+                <label for="city3" class="mx-2 AvenirLTStd-Light">All</label>
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-end">
+            <button pButton pRipple type="button" icon="pi pi-search"
+                class="p-button-rounded p-button-success mt-2" (click)="onGo();op.hide()"></button>
+
+        </div>
+    </ng-template>
+</p-overlayPanel>

@@ -1,0 +1,67 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../images/bg-login.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .login-panel {
+    width: 450px;
+    min-height: 340px;
+    background-color: #fafafa;
+    padding: 0;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 7px 8px -4px rgb(0 0 0 / 20%), 0 5px 22px 4px rgb(0 0 0 / 12%), 0 12px 17px 2px rgb(0 0 0 / 14%);
+    -moz-box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 5px 22px 4px rgba(0, 0, 0, 0.12), 0 12px 17px 2px rgba(0, 0, 0, 0.14);
+    box-shadow: 0 7px 8px -4px rgb(0 0 0 / 20%), 0 5px 22px 4px rgb(0 0 0 / 12%), 0 12px 17px 2px rgb(0 0 0 / 14%);
+    .login-panel-content {
+      padding: 12px 50px;
+      h1 {
+        font-size: 2rem !important;
+        font-weight: 500;
+        letter-spacing: 1px;
+        color: #181C32 !important;
+        margin-top: 0;
+        margin-bottom: 6px;
+        text-align: center;
+        font-family: "AvenirLTStd-Heavy", sans-serif !important;
+      }
+      label {
+        font-size: 16px;
+        color: #181C32 !important;
+        font-family: "AvenirLTStd-Heavy", sans-serif !important;
+      }
+      input {
+        background-color: #F3F6F9;
+        border-color: #F3F6F9;
+        color: #3F4254;
+        height: 50px;
+        margin-top: 3px;
+        -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+        border: 1px solid #ced4da;
+        width: 100%;
+      }
+      .pi{
+        cursor: pointer;
+      }
+    }
+  }
+}
+@media (max-width: $screen-sm) {
+  .login-container {
+    .login-panel {
+      width: 90%;
+      min-height: 1px;
+      .login-panel-content {
+        padding: 12px 10px;
+      }
+    }
+  }
+}

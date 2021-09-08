@@ -1,0 +1,576 @@
+<div class="ms-5 ps-4 pt-4">
+    <form [formGroup]="inquiryForm" class="mt-4 mx-3">
+        <p-card class="p-3" styleClass="inquiry">
+            <div class="row align-items-start">
+                <div class="col-lg-6 col-12 d-flex nav pe-0">
+                    <div class="fieldset-title ps-3">
+                        <div class="legend">
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <h5 class="AvenirLTStd-Heavy mb-0 px-2 bg-white">Inquiry Details </h5>
+                            </div>
+                        </div>
+
+                        <div class="d-flex nav">
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Inquiry Date<span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                calendar_today
+                                            </span>
+                                        </span>
+                                        <!-- <p-calendar [ngClass]="{'is-invalid ': formControls.inquiryDate.invalid&& formError }" inputId="basic" formControlName="inquiryDate"
+                                            placeholder="MM/DD/YYYY"    ></p-calendar> -->
+                                            <input *ngIf="inquiryDateFlag" readonly type="text"
+                                            placeholder="MM/DD/YYYY"
+                                            class="form-control "
+                                            bsDatepicker [isDisabled]="inquiryDateFlag"
+                                            formControlName="inquiryDate"
+
+                                            >
+                                            <input *ngIf="!inquiryDateFlag" type="text"
+                                            placeholder="MM/DD/YYYY"
+                                            class="form-control "
+                                            bsDatepicker
+                                            formControlName="inquiryDate"
+                                            [ngClass]="{'is-invalid ': formControls.inquiryDate.invalid&& formError }"
+                                            [bsConfig]="{ adaptivePosition: true }"
+                                            >
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Program<span class="text-danger"> *</span>
+                                    </label>
+                                    <div class="d-flex align-items-center drop-cont">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                loyalty
+                                            </span>
+                                        </span>
+                                        <p-dropdown [resetFilterOnHide]="true" [filter]="true" [ngClass]="{'is-invalid ': formControls.program.invalid&& formError }"  placeholder="Select Program" class="w-100"
+                                            [options]="_apiservice.lookupresponse?.program"
+                                            formControlName="program" optionValue="id" optionLabel="name"
+                                            [showClear]="true"  styleClass="w-100"></p-dropdown>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Branch<span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <div class="d-flex align-items-center drop-cont">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                account_tree
+                                            </span>
+                                        </span>
+                                        <p-dropdown [resetFilterOnHide]="true" [filter]="true" [ngClass]="{'is-invalid ': formControls.branch.invalid&& formError }" placeholder="Select Branch" class="w-100"
+                                            [options]="_apiservice.lookupresponse?.branch"
+                                            formControlName="branch" optionValue="id" optionLabel="name"
+                                            [showClear]="true"  styleClass="w-100"></p-dropdown>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Branch Contact
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                alternate_email
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" formControlName="branchEmail" pInputText autocomplete="off"
+                                            placeholder="Branch Contact">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Funding Category <span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <div class="d-flex align-items-center drop-cont">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                groups
+                                            </span>
+                                        </span>
+                                        <p-dropdown [resetFilterOnHide]="true" [filter]="true" [ngClass]="{'is-invalid ': formControls.fundingCategory.invalid&& formError }" placeholder="Select Funding Category " class="w-100"
+                                            [options]="_apiservice.lookupresponse?.funding_category"
+                                            formControlName="fundingCategory" optionValue="id" optionLabel="name"
+                                            [showClear]="true"  styleClass="w-100"></p-dropdown>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Referral Category <span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <span class="d-flex align-items-center drop-cont">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                groups
+                                            </span>
+                                        </span>
+                                        <p-dropdown [resetFilterOnHide]="true" [filter]="true" placeholder="Select Referral Category" [ngClass]="{'is-invalid ': formControls.referralCategory.invalid&& formError }"
+                                            [options]="_apiservice.lookupresponse?.referral_category"
+                                            formControlName="referralCategory" optionValue="id" optionLabel="name"
+                                            [showClear]="true" class="w-100" styleClass="w-100"></p-dropdown>
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Caller Name<span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                person
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" formControlName="callerName" pInputText autocomplete="off"  [ngClass]="{'is-invalid ': formControls.callerName.invalid&& formError }"
+                                            placeholder="Caller Name">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Caller Phone<span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                call
+                                            </span>
+                                        </span>
+                                        <p-inputMask inputId="integeronly" mask="(999) 999-9999" placeholder="(999) 999-9999" [ngClass]="{'is-invalid ': formControls.callerPhone.invalid&& formError }"
+                                            formControlName="callerPhone" class="w-100" styleClass="w-100"></p-inputMask>
+
+                                        <!-- <input type="text" id="inputgroup" [ngClass]="{'is-invalid ': formControls.callerPhone.invalid&& formError }" styleClass="w-100" formControlName="callerPhone" pInputText autocomplete="off" placeholder="(999) 999-9999"> -->
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Relationship to Client
+                                    </label>
+                                    <span class="d-flex align-items-center drop-cont">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                person
+                                            </span>
+                                        </span>
+                                        <p-dropdown [resetFilterOnHide]="true" [filter]="true" placeholder="Relationship to Client"
+                                            [options]="_apiservice.lookupresponse?.relationship_to_client"
+                                            formControlName="relationshipToClient" optionValue="id" optionLabel="name"
+                                            [showClear]="true" class="w-100" styleClass="w-100"></p-dropdown>
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Caller Email
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                alternate_email
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" formControlName="callerEmail" pInputText autocomplete="off"
+                                            placeholder="Caller Email">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2  ">
+                                <div class="p-inputgroup row">
+                                    <!-- <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Caller Email
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                alternate_email
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" formControlName="callerEmail" pInputText autocomplete="off"
+                                            placeholder="Caller Email">
+                                    </span> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-container>
+                    <div class="fieldset-title ps-3 mt-0">
+                        <div class="legend">
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <h5 class="AvenirLTStd-Heavy mb-0 px-2 bg-white">Inquiry Dates</h5>
+                            </div>
+                        </div>
+                        <div class="d-flex nav">
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">SOC Date
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                today
+                                            </span>
+                                        </span>
+                                        <!-- <p-calendar inputId="basic" formControlName="socDate" placeholder="MM/DD/YYYY">
+                                        </p-calendar> -->
+                                        <input type="text" *ngIf="this._apiservice.referralPrivilageId==1"
+                                        placeholder="MM/DD/YYYY"
+                                        class="form-control "
+                                        bsDatepicker
+                                        formControlName="socDate"
+                                        [bsConfig]="{ adaptivePosition: true }"
+                                        placement="top"
+                                        >
+                                        <input type="text" *ngIf="this._apiservice.referralPrivilageId!=1"
+                                        placeholder="MM/DD/YYYY"
+                                        class="form-control " readonly
+
+                                        formControlName="socDate"
+
+                                        >
+                                    </span>
+                                </div>
+                            </div>
+                            <div class=" col-lg-6 col-12 pt-4  pe-0">
+                                <div class="d-flex align-items-center pt-2">
+                                    <div class="p-inputgroup w-auto me-2">
+                                        <div class="p-field-checkbox ">
+                                            <p-checkbox [disabled]="this._apiservice.referralPrivilageId!=1" inputId="binary" [binary]="true" formControlName="verifiedPoc">
+                                            </p-checkbox>
+                                        </div>
+                                        <p class="f-14 AvenirLTStd-Heavy mb-0 ms-2 white-space-nowrap">Verified POC</p>
+                                    </div>
+                                    <div class="p-inputgroup w-auto">
+                                        <div class="p-field-checkbox ">
+                                            <p-checkbox [disabled]="this._apiservice.referralPrivilageId!=1" inputId="binary" [binary]="true"
+                                                formControlName="verifiedInteractant"></p-checkbox>
+                                        </div>
+                                        <p class="f-14 AvenirLTStd-Heavy mb-0 ms-2 white-space-nowrap">Verified
+                                            Interactant</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Bill Post Date
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                today
+                                            </span>
+                                        </span>
+                                        <!-- <p-calendar inputId="basic" formControlName="billPostDate"
+                                            placeholder="MM/DD/YYYY"></p-calendar> -->
+                                            <input type="text" *ngIf="this._apiservice.referralPrivilageId==1"
+                                            placeholder="MM/DD/YYYY"
+                                            class="form-control "
+                                            bsDatepicker
+                                            formControlName="billPostDate"
+                                            [bsConfig]="{ adaptivePosition: true }"
+                                            placement="top"
+                                            >
+                                            <input type="text" *ngIf="this._apiservice.referralPrivilageId!=1"
+                                            placeholder="MM/DD/YYYY"
+                                            class="form-control "
+                                            readonly
+                                            formControlName="billPostDate"
+
+                                            >
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Status
+                                    </label>
+                                    <span class="d-flex align-items-center drop-cont">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                autorenew
+                                            </span>
+                                        </span>
+                                        <p-dropdown [disabled]="this._apiservice.referralPrivilageId!=1" [resetFilterOnHide]="true" [filter]="true" placeholder="Select Status" formControlName="status"
+                                            [options]="_apiservice.lookupresponse?.status" optionValue="id" optionLabel="name"
+                                            [showClear]="true" class="w-100" styleClass="w-100"></p-dropdown>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </ng-container>
+                </div>
+                <div class="col-lg-6 col-12 d-flex nav">
+                    <div class="fieldset-title ps-3">
+                        <div class="legend">
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <h5 class="AvenirLTStd-Heavy mb-0 px-2 bg-white">Client Profile</h5>
+                            </div>
+                        </div>
+                        <div class="d-flex nav">
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Client Last Name
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                person
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" formControlName="clientLastName" pInputText autocomplete="off"
+                                            placeholder="Client Last Name">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Client Email
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                alternate_email
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" formControlName="clientEmail" pInputText autocomplete="off"
+                                            placeholder="Client Email">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Client First Name
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                person
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" formControlName="clientFirstName" pInputText autocomplete="off"
+                                            placeholder="Client First Name">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Phone
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                call
+                                            </span>
+                                        </span>
+                                        <p-inputMask inputId="integeronly" mask="(999) 999-9999" placeholder="(999) 999-9999"
+                                        formControlName="phone" class="w-100" styleClass="w-100"></p-inputMask>
+                                        <!-- <input  type="text" id="inputgroup" pInputText autocomplete="off"  formControlName="phone" class="w-100" styleClass="w-100"
+                                        placeholder="(999) 999-9999"> -->
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Address
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                home
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" formControlName="address" pInputText autocomplete="off"
+                                            placeholder="Address">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Alternate Phone
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                call
+                                            </span>
+                                        </span>
+                                        <p-inputMask  mask="(999) 999-9999"  inputId="integeronly" placeholder="(999) 999-9999"
+                                             formControlName="alternatePhone" class="w-100" styleClass="w-100"></p-inputMask>
+                                        <!-- <input type="text" id="inputgroup" styleClass="w-100" formControlName="alternatePhone" pInputText autocomplete="off" placeholder="(999) 999-9999"> -->
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">City
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                apartment
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" formControlName="city" pInputText autocomplete="off"
+                                            placeholder="City">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">State
+                                    </label>
+                                    <span class="d-flex align-items-center drop-cont">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                flag
+                                            </span>
+                                        </span>
+                                        <p-dropdown [resetFilterOnHide]="true" [filter]="true" placeholder="Select State" [options]="_apiservice.lookupresponse?.state"
+                                            formControlName="state" optionValue="id" optionLabel="name"
+                                            [showClear]="true" class="w-100" styleClass="w-100"></p-dropdown>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Zip
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                flag
+                                            </span>
+                                        </span>
+                                        <!-- <p-inputNumber id="inputgroup" [useGrouping]="false" formControlName="zip" placeholder="Zip" class="w-100" styleClass="w-100">
+                                        </p-inputNumber> -->
+                                        <input type="text" id="inputgroup" formControlName="zip" pInputText autocomplete="off"
+                                        placeholder="Zip">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field col-lg-6 col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy ">Gender
+                                    </label>
+                                    <span class="d-flex align-items-center drop-cont">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                person
+                                            </span>
+                                        </span>
+                                        <p-dropdown [resetFilterOnHide]="true" [filter]="true" placeholder="Select Gender" [options]="_apiservice.lookupresponse?.gender"
+                                            formControlName="gender" optionValue="id" optionLabel="name"
+                                            [showClear]="true" class="w-100" styleClass="w-100"></p-dropdown>
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div class="p-field d-flex col-lg-6 col-12  pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy "> Birth Date
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                      <span class="p-inputgroup-addon">
+                                          <span class="material-icons-outlined f-20">
+                                              today
+                                          </span>
+                                      </span>
+                                      <!-- <p-calendar inputId="basic" formControlName="birthDate"
+                                          placeholder="MM/DD/YYYY"></p-calendar> -->
+                                          <input type="text"
+                                          placeholder="MM/DD/YYYY"
+                                          class="form-control "
+                                          bsDatepicker
+                                          formControlName="birthDate"
+                                          [bsConfig]="{ adaptivePosition: true }"
+                                          placement="top"
+                                          >
+                                  </span>
+                                </div>
+                            </div>
+                            <!-- <div class="p-field d-flex col-lg-6 col-12  pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy "> Requested Services
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                      <span class="p-inputgroup-addon">
+                                          <span class="material-icons-outlined f-20">
+                                            medical_services
+                                          </span>
+                                      </span>
+                                      <p-multiSelect [options]="" defaultLabel="Select Services" optionLabel="name" class="w-100" styleClass="w-100"></p-multiSelect>
+                                  </span>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="fieldset-title ps-3 mt-0 w-100">
+                        <div class="legend">
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <h5 class="AvenirLTStd-Heavy mb-0 px-2 bg-white">Requested Services</h5>
+                            </div>
+                        </div>
+                        <div class="d-flex nav">
+                            <div class="p-field d-flex col-lg-6 col-12  pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy "> Services
+                                    </label>
+                                    <span class="d-flex align-items-center ">
+                                      <span class="p-inputgroup-addon">
+                                          <span class="material-icons-outlined f-20">
+                                            medical_services
+                                          </span>
+                                      </span>
+                                      <p-multiSelect selectedItemsLabel="{0} items selected" formControlName="requestedServices" [selectionLimit]="20" display="chip" [resetFilterOnHide]="true" [itemSize]="34"  [virtualScroll]="true"  [options]="_apiservice.lookupresponse?.requested_services" [showToggleAll]="true" defaultLabel="Select Services" optionLabel="name" class="w-100" optionValue="id" styleClass="w-100"></p-multiSelect>
+                                  </span>
+                                  <label for="inputgroup" class="f-12 AvenirLTStd-Light ">Select up to 20 choices
+                                </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="_apiservice.referralPrivilageId!=4" class="nav justify-content-between align-items-center mt-2 px-2">
+                <button pButton pRipple type="button" icon="pi pi-times" (click)="onClose()"  label="Close" class="p-button-danger "  ></button>
+                <button *ngIf="inquiryForm.value.id!=0" (click)="newActivity()"  pButton pRipple type="button" icon="pi pi-plus-circle" label="Add Activity" class="p-button-info  "  ></button>
+                <p-button  (click)="saveInquiry()" label="{{ inquiryForm.value.id==0?'Create':'Save'}}" icon="pi pi-send"></p-button>
+            </div>
+            <div *ngIf="_apiservice.referralPrivilageId==4" class="nav justify-content-between align-items-center mt-2 px-2">
+              <button pButton pRipple type="button" icon="pi pi-times" (click)="onClose()"  label="Close" class="p-button-danger "  ></button>
+            </div>
+        </p-card>
+    </form>
+</div>

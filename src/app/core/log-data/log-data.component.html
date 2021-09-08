@@ -1,0 +1,24 @@
+<div class="card mt-4">
+    <p-table  [value]="array"  styleClass="p-datatable-sm custom-table p-datatable-gridlines log-table">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="sticky-top">Date created</th>
+                <th class="sticky-top" >Date Modified</th>
+                <th class="sticky-top" >Last Modified By</th>
+                <th class="sticky-top" >Record ID #</th>
+                <th class="sticky-top" >Record Owner</th>
+                <th class="sticky-top" >What was changed</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-index="rowIndex">
+            <tr>
+                <td>11/08/2021</td>
+                <td>12/08/2021</td>
+                <td>12/08/2021</td>
+                <td class="bg-aliceblue">54382{{index}}</td>
+                <td>ADAMS</td>
+                <td>Actvity</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

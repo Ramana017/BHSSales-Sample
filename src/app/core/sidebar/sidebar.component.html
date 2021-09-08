@@ -1,0 +1,162 @@
+<!-- <p>sidebar works!</p> -->
+<div class="sidebar-cont">
+  <div
+    class="layout-wrapper layout-menu-light layout-topbar-light layout-sidebar p-ripple-disabled sidebar layout-mobile-active">
+    <div class="layout-topbar-wrapper">
+      <div class="menu-wrapper " [ngClass]="color" (mouseover)="color='layout-sidebar-active'" (mouseout)="color=''">
+        <div class="layout-menu-container">
+          <ul class="layout-menu">
+            <li class=" ">
+              <a class=" p-ripple" tabindex="0" class="list-item"
+                routerLinkActive="active-route">
+                <i class="layout-menuitem-icon  ">
+                  <span class="material-icons-outlined">
+                    settings_accessibility
+                  </span>
+                </i>
+                <span class="layout-menuitem-text f-18 AvenirLTStd-Heavy">Referrals</span>
+                <i class="pi pi-fw pi-chevron-down layout-submenu-toggler "></i>
+                <span class="p-ink"></span>
+              </a>
+              <ul role="menu" class="dropdown-child">
+                <li class=" " style="">
+                  <a class=" p-ripple" tabindex="0" [routerLink]="['/inquiries']" routerLinkActive="active-route"
+                    href="javascrit:void(0)">
+                    <i class="layout-menuitem-icon f-20">
+                      <span class="material-icons f-20">
+                        travel_explore
+                      </span>
+                    </i>
+                    <span class="layout-menuitem-text f-14 AvenirLTStd-Heavy">Inquiries</span>
+                    <span class="p-ink"></span>
+                  </a>
+                </li>
+                <li>
+                  <a class=" p-ripple" tabindex="0" [routerLink]="['/Activity']" routerLinkActive="active-route"
+                   >
+                    <i class="layout-menuitem-icon f-20">
+                      <span class="material-icons f-20">
+                        notifications_active
+                      </span>
+                    </i>
+                    <span class="layout-menuitem-text f-14">Activities</span>
+                    <span class="p-ink"></span>
+                  </a>
+                </li>
+
+              </ul>
+            </li>
+            <li class=" ">
+              <a class=" p-ripple" tabindex="0" class="list-item"
+                routerLinkActive="active-route">
+                <i class="layout-menuitem-icon  ">
+                  <span class="material-icons-outlined">
+                    <span class="material-icons-outlined">
+                      admin_panel_settings
+                      </span>
+                  </span>
+                </i>
+                <span class="layout-menuitem-text f-18 AvenirLTStd-Heavy">Credentialing</span>
+                <i class="pi pi-fw pi-chevron-down layout-submenu-toggler "></i>
+                <span class="p-ink"></span>
+              </a>
+              <ul role="menu" class="dropdown-child">
+
+                <li>
+                  <a class=" p-ripple" tabindex="0" [routerLink]="['/branch']" routerLinkActive="active-route"
+                    href="javascrit:void(0)">
+                    <i class="layout-menuitem-icon f-20">
+                      <span class="material-icons-outlined f-20">
+                        account_tree
+                      </span>
+                    </i>
+                    <span class="layout-menuitem-text f-14">Branch</span>
+                    <span class="p-ink"></span>
+                  </a>
+                </li>
+
+              </ul>
+            </li>
+            <li class="d-none">
+              <a class=" p-ripple" tabindex="0" class="list-item">
+                <i class="layout-menuitem-icon  ">
+                  <span class="material-icons">
+                    security
+                  </span>
+                </i>
+                <span class="layout-menuitem-text f-18 AvenirLTStd-Heavy">Security</span>
+                <i class="pi pi-fw pi-chevron-down layout-submenu-toggler "></i>
+                <span class="p-ink"></span>
+              </a>
+              <ul role="menu" class="dropdown-child">
+                <li class=" " style="">
+                  <a class=" p-ripple" tabindex="0" [routerLink]="['/roles']" routerLinkActive="active-route"
+                    href="javascrit:void(0)">
+                    <i class="layout-menuitem-icon f-20">
+                      <span class="material-icons f-20">
+                        tune
+                      </span>
+                    </i>
+                    <span class="layout-menuitem-text f-14 AvenirLTStd-Heavy">Roles</span>
+                    <span class="p-ink"></span>
+                  </a>
+
+                </li>
+                <li>
+                  <a class=" p-ripple" tabindex="0" [routerLink]="['/groups']" routerLinkActive="active-route"
+                    href="javascrit:void(0)">
+                    <i class="layout-menuitem-icon f-20">
+                      <span class="material-icons f-20">
+                        groups
+                      </span>
+                    </i>
+                    <span class="layout-menuitem-text f-14">Groups</span>
+                    <span class="p-ink"></span>
+                  </a>
+                </li>
+                <li>
+                  <a class=" p-ripple" tabindex="0" [routerLink]="['/users']" routerLinkActive="active-route"
+                    href="javascrit:void(0)">
+                    <i class="layout-menuitem-icon f-20">
+                      <span class="material-icons f-20">
+                        people
+                      </span>
+                    </i>
+                    <span class="layout-menuitem-text f-14">Users</span>
+                    <span class="p-ink"></span>
+                  </a>
+                </li>
+                <!-- <li>
+                  <a class=" p-ripple" tabindex="0" [routerLink]="['/security-settings']"
+                    routerLinkActive="active-route" href="javascrit:void(0)">
+                    <i class="layout-menuitem-icon f-20">
+                      <span class="material-icons f-20">
+                        admin_panel_settings
+                      </span>
+                    </i>
+                    <span class="layout-menuitem-text f-14">Security Settings</span>
+                    <span class="p-ink"></span>
+                  </a>
+                </li> -->
+              </ul>
+            </li>
+            <li class="d-none ">
+              <a class=" p-ripple" tabindex="0" class="list-item"
+                routerLinkActive="active-route" (click)="show()">
+                <i class="layout-menuitem-icon  ">
+                  <span class="material-icons">
+                  list
+                  </span>
+                </i>
+                <span class="layout-menuitem-text f-18 AvenirLTStd-Heavy">Log Data </span>
+                <!-- <i class="pi pi-fw pi-chevron-down layout-submenu-toggler "></i> -->
+                <span class="p-ink"></span>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

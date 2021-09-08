@@ -1,0 +1,47 @@
+.logo{
+    height: 50px;
+}
+// usersymbol 
+.user-symbol {
+    padding-right: 20px;
+   
+    display: flex;
+    align-items: center;
+    .symbol {
+        border-radius: 50%;
+        width: 40px;
+        text-align: center;
+        /* text-align: justify; */
+        justify-content: center;
+        background-color: #767676;
+        color: var(--white) !important;
+        position: relative;
+        height: 40px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.15;
+        letter-spacing: normal;
+        text-decoration: none;
+        align-items: center;
+        display: flex;
+        font-size: 16px;
+    }
+}
+// dropdown 
+.drop-list{
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-family: "AvenirLTStd-Light", sans-serif !important;
+    cursor: pointer;
+    color: #6f8ba4;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.21;
+    letter-spacing: normal;
+    &:hover{
+        color: var(--black);
+    }
+}

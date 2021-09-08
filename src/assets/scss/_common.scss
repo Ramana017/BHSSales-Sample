@@ -1,0 +1,303 @@
+/* Font Styles Files */
+
+@font-face {
+  font-family: "AvenirLTStd-Black";
+  src: url("../fonts/AvenirLTStd-Black.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "AvenirLTStd-BlackOblique";
+  src: url("../fonts/AvenirLTStd-BlackOblique.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "AvenirLTStd-BookOblique";
+  src: url("../fonts/AvenirLTStd-BookOblique.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "AvenirLTStd-Book";
+  src: url("../fonts/AvenirLTStd-Book.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "AvenirLTStd-Heavy";
+  src: url("../fonts/AvenirLTStd-Heavy.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "AvenirLTStd-Light";
+  src: url("../fonts/AvenirLTStd-Light.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "AvenirLTStd-HeavyOblique";
+  src: url("../fonts/AvenirLTStd-HeavyOblique.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "AvenirLTStd-LightOblique";
+  src: url("../fonts/AvenirLTStd-LightOblique.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "AvenirLTStd-Medium";
+  src: url("../fonts/AvenirLTStd-Medium.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "AvenirLTStd-MediumOblique";
+  src: url("../fonts/AvenirLTStd-MediumOblique.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "AvenirLTStd-Oblique";
+  src: url("../fonts/AvenirLTStd-Oblique.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "AvenirLTStd-Roman";
+  src: url("../fonts/AvenirLTStd-Roman.otf") format("truetype");
+}
+
+
+
+.AvenirLTStd-BlackOblique {
+  font-family: "AvenirLTStd-BlackOblique", sans-serif !important;
+}
+
+.AvenirLTStd-BookOblique {
+  font-family: "AvenirLTStd-BookOblique", sans-serif !important;
+}
+
+.AvenirLTStd-Book {
+  font-family: "AvenirLTStd-Book", sans-serif !important;
+}
+
+.AvenirLTStd-Heavy {
+  font-family: "AvenirLTStd-Heavy", sans-serif !important;
+}
+
+.AvenirLTStd-Light {
+  font-family: "AvenirLTStd-Light", sans-serif !important;
+}
+
+.AvenirLTStd-HeavyOblique {
+  font-family: "AvenirLTStd-HeavyOblique", sans-serif !important;
+}
+
+.AvenirLTStd-LightOblique {
+  font-family: "AvenirLTStd-LightOblique", sans-serif !important;
+}
+
+.AvenirLTStd-Medium {
+  font-family: "AvenirLTStd-Medium", sans-serif !important;
+}
+
+.AvenirLTStd-Oblique {
+  font-family: "AvenirLTStd-Oblique", sans-serif !important;
+}
+
+.AvenirLTStd-Roman {
+  font-family: "AvenirLTStd-Roman", sans-serif !important;
+}
+// html,body{
+//   height: 100%;
+// }
+html {
+  font-size: 14px !important;
+}
+body {
+  font-family: "AvenirLTStd-Roman", sans-serif !important;
+  background-color: #f9f9f9 !important;
+}
+
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none !important;
+}
+//width
+.w-120{
+  width: 120px;
+}
+.w-200{
+  width: 200px;
+}
+.w-90px{
+  width: 90px;
+}
+//height
+.h-27{
+  height: 27px;
+}
+//@extend
+.l-0{
+  left: 0;
+}
+.r-0{
+  right: 0;
+}
+//font size
+.f-12{
+  font-size: 12px;
+}
+.f-20{
+  font-size: 20px !important;
+}
+.f-16{
+  font-size: 16px !important;
+ }
+ .f-14{
+   font-size: 14px !important;
+ }
+ .f-18{
+   font-size: 18px !important;
+ }
+ .f-10rem{
+   font-size: 10rem;
+ }
+//bg-color
+.bg-white {
+  background-color: $white !important;
+}
+
+.bg-grey-darker{
+  background: $table-bg-grey !important;
+}
+.bg-dark-header{
+  background-color: #343a40;
+}
+.is-invalid{
+  border-color: #f44336 !important;
+  .p-dropdown,.p-inputnumber-input, input{
+    border-color: #f44336 !important;
+  }
+}
+//color
+.color-green{
+  color: $primary;
+}
+.color-white {
+  color: $white !important;
+}
+.grey-light {
+  color: $grey-light;
+}
+.table-grey{
+  color: $table-bg-grey;
+}
+.blue-light {
+  // color: $blue-light;
+}
+.bg-blue{
+  background: #145194 !important;
+}
+.bg-aliceblue{
+  background: aliceblue;
+}
+.color-logo-pink{
+// color: $btn-cater-pink;
+}
+.color-darkgrey{
+  color: darkgrey;
+}
+.color-black{
+  color: $black;
+}
+//other
+.cursor-pointer{
+  cursor: pointer;
+}
+.l-height-21{
+  line-height: 21px;
+}
+.white-space-nowrap{
+  white-space: nowrap;
+}
+.box-shadow {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 16%);
+}
+
+.material-icons {
+  cursor: pointer;
+}
+.sticky-bottom{
+  position: sticky;
+  bottom: 0;
+  z-index: 999;
+}
+.z-index-1022{
+  z-index: 1022 !important;
+}
+.w-90{
+  width: 90%;
+}
+// ==================scroll styles=================
+
+/* width & height*/
+
+::-webkit-scrollbar {
+  width: 7px !important;
+  height: 7px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px rgb(226, 226, 226);
+  border-radius: 10px;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: rgb(202, 201, 201);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #acacac;
+}
+
+// ==================scroll styles=================
+:-ms-input-placeholder {
+  font-size: 12px;
+  background-color: #e0e3e4;
+}
+
+::placeholder {
+  font-size: 12px;
+}
+.p-dropdown-filter {
+  width: 100% !important;
+}
+.p-tooltip{
+  z-index: 1025 !important;
+}
+.timepopup {
+  .modal-header {
+    background-color: #343a40;
+    color: $white;
+    position: sticky;
+  }
+  .modal-content {
+    @include margin(null, null, null, null);
+    width: 100%;
+    height: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #f7fafc;
+  }
+  button {
+    @include border-radius(null, 8px, null, 8px);
+  }
+}
+.form-control{
+  font-family: "AvenirLTStd-Roman", sans-serif !important;  
+}

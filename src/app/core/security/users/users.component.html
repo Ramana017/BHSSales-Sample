@@ -1,0 +1,549 @@
+<!-- <p>users works!</p> -->
+<div class="ms-5 ps-4  pt-4">
+    <div class="row m-0 pt-5">
+        <div class="col-md-12 col-lg-4 col-12 my-3">
+            <div class="card">
+                <p-table [value]="userList" styleClass="p-datatable-sm custom-table p-datatable-gridlines">
+                    <ng-template pTemplate="caption">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h5 class="mb-0 AvenirLTStd-Heavy color-white">Users List</h5>
+                            <div class="d-flex align-items-center">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-search"></i>
+                                    <input type="text" pInputText autocomplete="off" placeholder="Quick Search By User"
+                                        class="AvenirLTStd-Roman" />
+                                </span>
+                                <span class="material-icons-outlined cursor-pointer" (click)="op.toggle($event)">
+                                    filter_alt
+                                </span>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="sticky-top" style="width: 3rem"></th>
+                            <th class="sticky-top" style="width: 3rem"></th>
+                            <th class="sticky-top">Login ID</th>
+                            <th class="sticky-top">Name</th>
+                            <th class="sticky-top" style="width:10rem">Active</th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                        <tr>
+                            <td class="text-center" (click)="editRole()"><span
+                                    class="material-icons-outlined f-20 color-green cursor-pointer">
+                                    edit
+                                </span></td>
+                            <td class="text-center" (click)="editRole();showBasicDialog()"><span
+                                    class="material-icons-outlined f-20 color-green cursor-pointer">
+                                    vpn_key
+                                </span></td>
+                            <td>admin</td>
+                            <td>admin</td>
+                            <td>Yes</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+                <p-paginator [rows]="10" [totalRecords]='10' [rowsPerPageOptions]="[10,20,30]"></p-paginator>
+
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-8 col-12 roles-custom-header my-3 pe-lg-5">
+            <ul class="timeline m-0 p-0 w-100 d-flex align-items-center" id="timeline" *ngIf="!privilage">
+                <li class="li timeline-item " [ngClass]="{'complete': tabIndex === 0, 'visited': tabIndex > 0 }"
+                    (click)="tabIndex=0">
+                    <div>
+                        <div class="number-wrapper mb-2" pTooltip="Users"> <span class="timeline-icon "><span
+                                    class="material-icons color-white">
+                                    done
+                                </span></span></div>
+                        <!-- <h6 class="shift-wrapper beta-group label-text">Users</h6> -->
+                    </div>
+                </li>
+                <li class="li timeline-item" [ngClass]="{'complete': tabIndex === 1, 'visited': tabIndex > 1}"
+                    (click)="tabIndex=1">
+                    <div>
+                        <div class="number-wrapper mb-2" pTooltip="Address"> <span class="timeline-icon"><span
+                                    class="material-icons color-white">
+                                    done
+                                </span></span></div>
+                        <!-- <h6 class="shift-wrapper label-text">Address</h6> -->
+                    </div>
+                </li>
+            </ul>
+            <p-card styleClass="pt-0" *ngIf="!privilage">
+                <div class="fieldset ">
+                    <div class=" ">
+                        <div class="d-flex align-items-center justify-content-between title-header">
+                            <h5 class="AvenirLTStd-Heavy mb-0 px-2 " *ngIf="!edit">Create User</h5>
+                            <h5 class="AvenirLTStd-Heavy mb-0 px-2 " *ngIf="edit">Edit User</h5>
+                            <h5 class="AvenirLTStd-Heavy mb-0 px-2 cursor-pointer" *ngIf="edit"
+                                (click)="privilage=true">Map Roles</h5>
+                        </div>
+                    </div>
+                    <div class="p-fluid p-grid row m-0 " *ngIf="tabIndex===0">
+                        <div class="p-field  col-md-6    col-12 pt-4 pe-0">
+                            <div class="p-inputgroup row">
+                                <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Login ID
+                                </label>
+
+                                <span class="d-flex align-items-center  col-8">
+                                    <span class="p-inputgroup-addon">
+                                        <span class="material-icons-outlined f-20">
+                                            person
+                                        </span>
+                                    </span>
+                                    <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Login ID">
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class=" col-md-6 col-12 pt-4 d-flex pe-0">
+                            <div class="p-inputgroup ">
+                                <p class="f-14 AvenirLTStd-Heavy mb-0 me-2">Is Admin</p>
+                                <div class="p-field-checkbox ">
+                                    <p-checkbox [(ngModel)]="checked" inputId="binary"></p-checkbox>
+                                </div>
+                            </div>
+                            <div class="p-inputgroup ">
+                                <p class="f-14 AvenirLTStd-Heavy mb-0 me-2">Is Supervisor</p>
+                                <div class="p-field-checkbox ">
+                                    <p-checkbox inputId="binary"></p-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-field  col-md-6   col-12 pt-4 pe-0">
+                            <div class="p-inputgroup row">
+                                <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Last Name
+                                </label>
+                                <span class="d-flex align-items-center col-8">
+                                    <span class="p-inputgroup-addon">
+                                        <span class="material-icons-outlined f-20">
+                                            person
+                                        </span>
+                                    </span>
+                                    <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Last Name">
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-field  col-md-6   col-12 pt-4 pe-0">
+                            <div class="p-inputgroup row">
+                                <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Middle Name
+                                </label>
+                                <span class="d-flex align-items-center col-8">
+                                    <span class="p-inputgroup-addon">
+                                        <span class="material-icons-outlined f-20">
+                                            person
+                                        </span>
+                                    </span>
+                                    <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Middle Name">
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-field  col-md-6   col-12 pt-4 pe-0">
+                            <div class="p-inputgroup row">
+                                <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">First Name
+                                </label>
+                                <span class="d-flex align-items-center col-8">
+                                    <span class="p-inputgroup-addon">
+                                        <span class="material-icons-outlined f-20">
+                                            person
+                                        </span>
+                                    </span>
+                                    <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="First Name">
+
+                                </span>
+                            </div>
+
+                        </div>
+                        <div class="p-field  col-md-6   col-12 pt-4 pe-0 ">
+                            <div class="p-inputgroup row">
+                                <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">User Type
+                                </label>
+                                <span class="d-flex align-items-center col-8">
+                                    <span class="p-inputgroup-addon">
+                                        <span class="material-icons-outlined f-20">
+                                            format_list_bulleted
+                                        </span>
+                                    </span>
+                                    <p-dropdown [resetFilterOnHide]="true" placeholder="User Type" optionLabel="name" [showClear]="true"
+                                        class="w-100" styleClass="w-100"></p-dropdown>
+                                </span>
+                            </div>
+                        </div>
+                        <div class=" col-md-6 col-12 pt-4" *ngIf="edit">
+                            <div class="p-inputgroup">
+                                <p class="f-14 AvenirLTStd-Heavy mb-0 col-4">Active</p>
+                                <div class="p-field-checkbox ">
+                                    <p-inputSwitch [(ngModel)]="checked1"></p-inputSwitch>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fieldset-title" *ngIf="tabIndex===1">
+                        <div class="legend">
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <h5 class="AvenirLTStd-Heavy mb-0 px-2 bg-white">Address</h5>
+                            </div>
+                        </div>
+                        <div class="p-fluid p-grid row m-0 ">
+                            <div class="p-field  col-md-6    col-12 pt-2 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Building
+                                    </label>
+
+                                    <span class="d-flex align-items-center  col-8">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                apartment
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Building">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field  col-md-6   col-12 pt-2 pe-0 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Home Phone
+                                    </label>
+                                    <span class="d-flex align-items-center col-8">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                call
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Home Phone">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field  col-md-6   col-12 pt-2 pe-0 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Street
+                                    </label>
+                                    <span class="d-flex align-items-center col-8">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                <i class="fas fa-road"></i>
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Street">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field  col-md-6   col-12 pt-2 pe-0 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Home Fax
+                                    </label>
+                                    <span class="d-flex align-items-center col-8">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                print
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Home Fax">
+
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div class="p-field  col-md-6   col-12 pt-2 pe-0 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Suite
+                                    </label>
+                                    <span class="d-flex align-items-center col-8">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                location_on
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Suite">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field  col-md-6   col-12 pt-2 pe-0 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Work Phone
+                                    </label>
+                                    <span class="d-flex align-items-center col-8">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                call
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Work Phone">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field  col-md-6   col-12 pt-2 pe-0 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">State
+                                    </label>
+                                    <span class="d-flex align-items-center col-8">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons f-20">
+                                                list
+                                            </span>
+                                        </span>
+                                        <p-dropdown [resetFilterOnHide]="true" inputId="dropdown" [autoDisplayFirst]="false" optionLabel="name"
+                                            placeholder="State" class="w-100" styleClass="w-100"></p-dropdown>
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field  col-md-6   col-12 pt-2 pe-0 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Mobile
+                                    </label>
+                                    <span class="d-flex align-items-center col-8">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                smartphone
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Mobile">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field  col-md-6   col-12 pt-2 pe-0 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">County
+                                    </label>
+                                    <span class="d-flex align-items-center col-8">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                home
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="County">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field  col-md-6   col-12 pt-2 pe-0 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Email
+                                    </label>
+                                    <span class="d-flex align-items-center col-8">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                alternate_email
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Email">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field  col-md-6   col-12 pt-2 pe-0 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">City
+                                    </label>
+                                    <span class="d-flex align-items-center col-8">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                apartment
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="City">
+
+                                    </span>
+                                </div>
+                                <div class="p-inputgroup row pt-2">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Zip
+                                    </label>
+                                    <span class="d-flex align-items-center col-8">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                email
+                                            </span>
+                                        </span>
+                                        <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Zip">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-field  col-md-6   col-12 pt-2 pe-0 ">
+                                <div class="p-inputgroup row">
+                                    <label for="inputgroup" class="f-14 AvenirLTStd-Heavy col-4">Directions
+                                    </label>
+                                    <span class="d-flex col-8">
+                                        <span class="p-inputgroup-addon">
+                                            <span class="material-icons-outlined f-20">
+                                                directions
+                                            </span>
+                                        </span>
+                                        <textarea id="float-input" rows="2" pInputText autocomplete="off"area
+                                            placeholder="Description"></textarea>
+
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="nav justify-content-between align-items-center mt-2 px-2">
+                        <button pButton pRipple type="button" icon="pi pi-times" label="Cancel"
+                            class="p-button-danger"></button>
+                        <p-button label="Next" icon="pi pi-angle-right" *ngIf="tabIndex===0" (click)="next()">
+                        </p-button>
+                        <p-button label="Save" icon="pi pi-save" *ngIf="tabIndex===1"></p-button>
+                    </div>
+                </div>
+            </p-card>
+            <p-card styleClass="pt-0 mt-2" *ngIf="privilage">
+                <div class="fieldset ">
+                    <div class=" ">
+                        <div class="d-flex title-header align-items-center justify-content-between">
+                            <h5 class="AvenirLTStd-Heavy mb-0 px-2 ">Map Roles</h5>
+                            <h5 class="AvenirLTStd-Heavy mb-0 px-2 cursor-pointer" (click)="privilage=false">Edit User
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="p-fluid p-grid row m-0 mb-2">
+                        <div class="col-md-4 col-12 d-flex align-items-center">
+                            <div class="p-field-checkbox ">
+                                <p class="f-16 AvenirLTStd-Heavy mb-0 mt-2">Role: coordinator</p>
+                            </div>
+                        </div>
+                        <!-- <div class="p-field   col-md-4  col-12 pt-4">
+                            <div class="p-inputgroup">
+                                <span class="p-inputgroup-addon">
+                                    <span class="material-icons-outlined f-20">
+                                        badge
+                                    </span>
+                                </span>
+                                <span class="p-float-label">
+                                    <p-dropdown [resetFilterOnHide]="true" inputId="dropdown" [autoDisplayFirst]="false" optionLabel="name"
+                                        class="w-100" styleClass="w-100"></p-dropdown>
+                                    <label for="inputgroup">Module
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-field   col-md-4  col-12 pt-4">
+                            <div class="p-inputgroup">
+                                <span class="p-inputgroup-addon">
+                                    <span class="material-icons-round f-20">
+                                        visibility_off
+                                    </span>
+                                </span>
+                                <span class="p-float-label">
+                                    <p-dropdown [resetFilterOnHide]="true" inputId="dropdown" [autoDisplayFirst]="false" optionLabel="name"
+                                        class="w-100" styleClass="w-100"></p-dropdown>
+                                    <label for="inputgroup">Privilege
+                                    </label>
+                                </span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <p-pickList [source]="userList" [target]="list2" sourceHeader="Available Groups"
+                        targetHeader="Selected Groups" [dragdrop]="true" [responsive]="true"
+                        [sourceStyle]="{'height':'25vh'}" [targetStyle]="{'height':'25vh'}" filterBy="id"
+                        sourceFilterPlaceholder="Search by Groups" targetFilterPlaceholder="Search by Roles">
+                        <ng-template let-customers pTemplate="item">
+                            <div class="product-item">
+                                {{customers.id}}
+                            </div>
+                        </ng-template>
+                    </p-pickList>
+                    <div class="nav justify-content-between align-items-center mt-2 px-2">
+                        <button pButton pRipple type="button" icon="pi pi-times" label="Cancel"
+                            class="p-button-danger"></button>
+                        <p-button label="Grant" icon="pi pi-send"></p-button>
+                    </div>
+                </div>
+            </p-card>
+
+        </div>
+    </div>
+</div>
+
+
+<p-overlayPanel #op [style]="{width: '300px'}" appendTo="body">
+    <ng-template pTemplate>
+        <label for="inputgroup" class="AvenirLTStd-Heavy f-14 mt-2">Group</label>
+        <div class="p-inputgroup  ">
+            <span class="p-inputgroup-addon">
+                <i class="pi pi-user"></i>
+            </span>
+            <span class="p-float-label">
+                <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="Group">
+            </span>
+        </div>
+        <label class="AvenirLTStd-Heavy f-14 mt-2">Active</label>
+        <div class="d-flex align-items-center ">
+            <div class="p-field-radiobutton d-flex align-items-center">
+                <p-radioButton name="groupname" value="val1" [(ngModel)]="selectedValue"></p-radioButton>
+                <label for="city1" class="mx-2 AvenirLTStd-Light">Yes</label>
+            </div>
+            <div class="p-field-radiobutton d-flex align-items-center ">
+                <p-radioButton name="groupname" value="val1" [(ngModel)]="selectedValue"></p-radioButton>
+                <label for="city2" class="mx-2 AvenirLTStd-Light">No</label>
+            </div>
+            <div class="p-field-radiobutton d-flex align-items-center">
+                <p-radioButton name="groupname" value="val1" [(ngModel)]="selectedValue"></p-radioButton>
+                <label for="city3" class="mx-2 AvenirLTStd-Light">All</label>
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-end">
+            <button pButton pRipple type="button" icon="pi pi-search"
+                class="p-button-rounded p-button-success mt-2"></button>
+
+        </div>
+    </ng-template>
+</p-overlayPanel>
+
+<p-dialog header="Reset Password" [(visible)]="displayBasic" [style]="{width: '30vw'}" [baseZIndex]="10000">
+    <div class="p-fluid p-grid row m-0 " >
+        <div class="p-field      col-12 pt-4 pe-0">
+            <div class="p-inputgroup row">
+                <label for="inputgroup" class="f-14 AvenirLTStd-Medium col-4">User Id
+                </label>
+
+                <span class="d-flex align-items-center  col-8">
+                    <span class="p-inputgroup-addon">
+                        <span class="material-icons-outlined f-20">
+                            person
+                        </span>
+                    </span>
+                    <input type="text" id="inputgroup" pInputText autocomplete="off" placeholder="User Id">
+
+                </span>
+            </div>
+        </div>
+        <div class="p-field      col-12 pt-4 pe-0">
+        <div class="p-inputgroup row">
+            <label for="inputgroup" class="f-14 AvenirLTStd-Medium col-4">Password
+            </label>
+
+            <span class="d-flex align-items-center  col-8">
+                <span class="p-inputgroup-addon">
+                    <span class="material-icons-outlined f-20">
+                        lock
+                    </span>
+                </span>
+                <input type="password" id="inputgroup" pInputText autocomplete="off" placeholder="Password">
+
+            </span>
+        </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <!-- <p-button icon="pi pi-check"  label="Ok" styleClass="p-button-text"></p-button> -->
+        <div class="nav justify-content-between align-items-center mt-2 px-2">
+            <button pButton pRipple type="button" icon="pi pi-times" label="Cancel" (click)="displayBasic=false"
+                class="p-button-danger"></button>
+            <p-button label="Save" icon="pi pi-save" (click)="displayBasic=false"></p-button>
+        </div>
+    </ng-template>
+</p-dialog>

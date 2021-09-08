@@ -1,0 +1,53 @@
+.p-dialog {
+  .p-dialog-header {
+    background: #767676 !important;
+    color: #ffffff !important;
+    padding: 10px 20px !important;
+    .p-dialog-header-icon {
+      color: $white !important;
+    }
+  }
+    .p-dialog-footer {
+      border-top: 0 none;
+      background: #767676 !important;
+      color: #ffffff !important;
+      padding: 18px !important;
+      text-align: center !important;
+      border-bottom-right-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+}
+.activityedit {
+  div.ms-5.pt-4,
+  div.mx-5.pt-5,
+  form.mt-4.mx-3 {
+    margin: 0 !important;
+    padding: 0 !important;
+    p-card {
+      padding: 0 !important;
+
+    }
+    .fieldset-title {
+      margin-right: 0 !important;
+    }
+  }
+  .p-dialog-content {
+    padding: 0 !important;
+
+    .p-button-save {
+      display: none;
+    }
+
+    .p-button-close {
+      display: block !important;
+    }
+  }
+}
+.about-us-popup {
+  padding: 20px 20px 0 20px;
+}
+.log-data-dialog{
+  .log-table{
+    max-height: 70vh;
+  }
+}
